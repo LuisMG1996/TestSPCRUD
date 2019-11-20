@@ -1,4 +1,5 @@
 var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
+
 $(function(){
     $("#btnCreate").click(function(){
         //var userid = _spPageContextInfo.userId;
@@ -8,6 +9,8 @@ $(function(){
         var nombre = document.getElementById('nombre').value;
         var date = document.getElementById('fechaNacimiento').value;
         var number = document.getElementById('telefono').value;
+        var digest = $('#__REQUESTDIGEST').val();
+
 
         console.log(title);
         console.log(nombre);
@@ -15,21 +18,26 @@ $(function(){
         console.log(number);
 
         var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')";
-        var requestHeaders = { 
-            "accept": "application/json;odata=verbose",
+        var requestBody = { 
             '__metadata': {
-                'type': 'SP.Data.listname.ListItem'
+                'type': 'SP.Data.TestOficial.ListItem'
             },
             'Title': title ,
             'Nombre':  nombre,
             'fechaNacimiento': date,
-            'Number': number 
-          };  
+            'Number': number
+            };
+        var requestHeaders = {
+            'X-RequestDigest': digest,
+            'accept': "application/json;odata=verbose",
+            'content-type': "application/json;odata=verbose"
+            };
     console.log(requestHeaders);
     $.ajax({
         url: requestUri,
         method: "POST",
         contentType: "application/json;odata=verbose",
+        body: requestBody,
         headers: requestHeaders,
         success: onSuccess,        
         error: onError    
