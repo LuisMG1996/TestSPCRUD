@@ -1,4 +1,4 @@
-var siteURl = "http://win-pdplr21ulp4/scotiatube"
+var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
 
 $(function(){
     $("#btnCreate").click(function(){
@@ -35,7 +35,7 @@ $(function(){
     console.log(requestHeaders);
     $.ajax({
         url: requestUri,
-        method: "POST",
+        type: "POST",
         contentType: "application/json;odata=verbose",
         body: requestBody,
         headers: requestHeaders,
