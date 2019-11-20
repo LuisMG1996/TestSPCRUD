@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+</head>
+<body>
+        <input type="button" id="btnClick" value="Click Here"/>
+        <script>
+        $(function () {
+        $("#btnClick").on("click", function () {
+        getAllLists();
+        });
+        });
+        
+        function getAllLists() {
+        var fullUrl = "http://win-pdplr21ulp4/sites/scotiatube/_api/lists/getbytitle('Test191119')";
+        $.ajax({
+        url: fullUrl,
+        type: "GET",
+        headers: {
+        "accept": "application/json;odata=verbose",
+        "content-type": "application/json;odata=verbose",
+        },
+        success: onQuerySucceeded,
+        error: onQueryFailed
+        });
+        }
+        
+        function onQuerySucceeded(data) {
+        var listItemInfo = "";
+        $.each(data.d.results, function (key, value) {
+        listItemInfo += 'Title: ' + value.Title + '<br />';
+        });
+        $("#divAllLists").html(listItemInfo);
+        }
+        function onQueryFailed() {
+        alert('Error!');
+        }
+        </script>
+</body>
+</html>
