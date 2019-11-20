@@ -17,10 +17,10 @@ $(function(){
         console.log(date);
         console.log(number);
 
-        var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')";
+        var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items";
         var requestBody = { 
             '__metadata': {
-                'type': 'SP.Data.TestOficial.ListItem'
+                'type': 'SP.Data.TestOficialListItem'
             },
             'Title': title ,
             'Nombre':  nombre,
