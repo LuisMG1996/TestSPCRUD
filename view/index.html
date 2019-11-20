@@ -9,21 +9,20 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
+    <div>
+        <h1>CRUD</h1>
+        <form>
+            <input type="text" id="title" placeholder="Title"><br>
+            <input type="text" id="nombre" placeholder="Nombre"><br>
+            <input type="date" id="fechaNacimiento"><br>
+            <input type="number" id="telefono" placeholder="telefono"><br>
 
-    <h1>CRUD</h1>
-    <form>
-        <input type="text" id="title" placeholder="Title"><br>
-        <input type="text" id="Nombre" placeholder="Nombre"><br>
-        <input type="date" id="fechaNacimiento"><br>
-        <input type="number" id="telefono" placeholder="telefono"><br>
-        
-        <input type="radio" name="action" id="action" value="Create">Insert<br>
-        <input type="radio" name="action" id="action" value="Read">Read<br>
-        <input type="radio" name="action" id="action" value="Update">Update<br>
-        <input type="radio" name="action" id="action" value="Delete">Delete<br>
-        <input type="button" id="btnClick" value="Dale Candela"><br>
-
-    </form>
+            <input type="button" id="btnCreate" value="Create"><br>
+            <input type="button" id="btnRead" value="Read"><br>
+            <input type="button" id="btnUpdate" value="Update"><br>
+            <input type="button" id="btnDelete" value="Delete"><br>
+        </form>
+    </div>
     
 </body>
 </html>
