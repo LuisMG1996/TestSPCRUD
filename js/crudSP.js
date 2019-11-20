@@ -1,4 +1,4 @@
-var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
+var siteURl = "http://win-pdplr21ulp4/scotiatube"
 
 $(function(){
     $("#btnCreate").click(function(){
