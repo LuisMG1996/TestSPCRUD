@@ -27,30 +27,32 @@ $(function(){
             'Number': number
             };
 
-    //console.log(requestHeaders);
-    $.ajax({
-        
-        url: requestUri,
-        type: "POST",
-        contentType: "application/json;odata=verbose",
-        body: requestBody,
-        headers: {
-            'X-RequestDigest': $('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue),
-            'Accept': "application/json;odata=verbose",
-            'content-type': "application/json;odata=verbose",
-            'X-HTTP-Method': 'POST'
-            },
-        success: onSuccess,        
-        error: onError    
-    });
-    function onSuccess(data, request) {        
-        var userinfo = data.d;               
-        alert ('Display Name: '+ userinfo.Title);  
-    } 
-    function onError(error) {        
-        alert("error");    
-    }
-    });
+    //Actualizar Digest
+
+        updateDigest();
+
+        $.ajax({
+            url: requestUri,
+            type: "POST",
+            contentType: "application/json;odata=verbose",
+            body: requestBody,
+            headers: {
+                'X-RequestDigest': $('#__REQUESTDIGEST').val(),
+                'Accept': "application/json;odata=verbose",
+                'content-type': "application/json;odata=verbose",
+                'X-HTTP-Method': 'POST'
+                },
+            success: onSuccess,        
+            error: onError    
+        });
+        function onSuccess(data, request) {        
+            var userinfo = data.d;               
+            alert ('Display Name: '+ userinfo.Title);  
+        } 
+        function onError(error) {        
+            alert("error");    
+        }
+        });
 }); 
 
 /*-----------------------------------------------------------------------
