@@ -33,8 +33,8 @@ $(function(){
     //Actualizar Digest
 
         //updateDigest();
-
-        /*$.ajax({
+/*
+        $.ajax({
             url: requestUri,
             type: "POST",
             contentType: "application/json;odata=verbose",
@@ -54,8 +54,8 @@ $(function(){
         } 
         function onError(error) {        
             alert("error");    
-        }
-        });*/
+        }*/
+        });
 }); 
 
 /*-----------------------------------------------------------------------
