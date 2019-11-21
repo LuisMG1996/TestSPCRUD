@@ -2,8 +2,8 @@ var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
 
 $(function(){
     $("#btnCreate").click(function(){
-        //var userid = _spPageContextInfo.userId;
-        //var requestUri = _spPageContextInfo.webAbsoluteUrl + ""/_api/lists/getByTitle('TestOficial')/items";
+        var userid = _spPageContextInfo.userId;
+        var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/lists/getByTitle('TestOficial')/items";
         
         var title = document.getElementById('title').value ;
         var nombre = document.getElementById('nombre').value;
@@ -15,6 +15,9 @@ $(function(){
         console.log(nombre);
         console.log(date);
         console.log(number);
+
+        console.log(userid);
+        console.log(requestUri);
 
         var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items";
         var requestBody = { 
@@ -29,9 +32,9 @@ $(function(){
 
     //Actualizar Digest
 
-        updateDigest();
+        //updateDigest();
 
-        $.ajax({
+        /*$.ajax({
             url: requestUri,
             type: "POST",
             contentType: "application/json;odata=verbose",
@@ -52,7 +55,7 @@ $(function(){
         function onError(error) {        
             alert("error");    
         }
-        });
+        });*/
 }); 
 
 /*-----------------------------------------------------------------------
@@ -63,7 +66,7 @@ $(function(){
     $("#btnRead").click(function(){
     var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items?$select=Title,Nombre,fechaNacimiento,Number";
     $.ajax({
-        url: fullUrl,
+        url: requestUri,
         type: "GET",
         headers: {
         "accept": "application/json;odata=verbose",
