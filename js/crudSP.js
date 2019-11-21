@@ -3,7 +3,7 @@ var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
 $(function(){
     $("#btnCreate").click(function(){
         //var userid = _spPageContextInfo.userId;
-        //var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/getuserbyid(" + userid + ")";
+        //var requestUri = _spPageContextInfo.webAbsoluteUrl + ""/_api/lists/getByTitle('TestOficial')/items";
         
         var title = document.getElementById('title').value ;
         var nombre = document.getElementById('nombre').value;
@@ -27,7 +27,7 @@ $(function(){
             'Number': number
             };
 
-    console.log(requestHeaders);
+    //console.log(requestHeaders);
     $.ajax({
         
         url: requestUri,
@@ -35,7 +35,7 @@ $(function(){
         contentType: "application/json;odata=verbose",
         body: requestBody,
         headers: {
-            'X-RequestDigest': $("#__REQUESTDIGEST").val(),
+            'X-RequestDigest': $('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue),
             'Accept': "application/json;odata=verbose",
             'content-type': "application/json;odata=verbose",
             'X-HTTP-Method': 'POST'
@@ -53,6 +53,10 @@ $(function(){
     });
 }); 
 
+/*-----------------------------------------------------------------------
+/ READ Operation
+/------------------------------------------------------------------------
+*/
 $(function(){
     $("#btnRead").click(function(){
     var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items?$select=Title,Nombre,fechaNacimiento,Number";
@@ -80,3 +84,24 @@ function onQuerySucceeded(data) {
     function onQueryFailed() {
     alert('Error!');
     }
+
+
+/*-----------------------------------------------------------------------
+/ READ Operation
+/------------------------------------------------------------------------
+*/
+
+function updateDigest(){
+    $.ajax({
+        url: _spPageContextInfo.webAbsoluteUrl + "/_api/contextinfo",
+        method: "POST",
+        headers: { "Accept": "application/json; odata=verbose"},
+        success: function (data) {
+            $('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue)
+        },
+        error: function (data, errorCode, errorMessage) {
+            alert(errorMessage)
+        }
+    });
+    
+}
