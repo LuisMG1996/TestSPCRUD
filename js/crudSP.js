@@ -52,3 +52,31 @@ $(function(){
     }
     });
 }); 
+
+$(function(){
+    $("#btnRead").click(function(){
+    var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items?$select=Title,Nombre,fechaNacimiento,Number";
+    $.ajax({
+        url: fullUrl,
+        type: "GET",
+        headers: {
+        "accept": "application/json;odata=verbose",
+        "content-type": "application/json;odata=verbose",
+        },
+        success: onQuerySucceeded,
+        error: onQueryFailed
+        });
+    });
+});
+
+function onQuerySucceeded(data) {
+    var listItemInfo = "";
+    $.each(data.d.results, function (key, value) {
+    listItemInfo += 'Title: ' + value.Title + ' Nombre: ' + value.Nombre + ' fechaNacimiento: ' + 
+        value.fechaNacimiento + ' Number: ' + value.Number;
+    });
+    alert(listItemInfo);
+}
+    function onQueryFailed() {
+    alert('Error!');
+    }
