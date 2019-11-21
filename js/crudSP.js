@@ -9,7 +9,6 @@ $(function(){
         var nombre = document.getElementById('nombre').value;
         var date = document.getElementById('fechaNacimiento').value;
         var number = document.getElementById('telefono').value;
-        var digest = $('#__REQUESTDIGEST').val();
 
 
         console.log(title);
@@ -27,18 +26,20 @@ $(function(){
             'fechaNacimiento': date,
             'Number': number
             };
-        var requestHeaders = {
-            'X-RequestDigest': digest,
-            'accept': "application/json;odata=verbose",
-            'content-type': "application/json;odata=verbose"
-            };
+
     console.log(requestHeaders);
     $.ajax({
+        
         url: requestUri,
         type: "POST",
         contentType: "application/json;odata=verbose",
         body: requestBody,
-        headers: requestHeaders,
+        headers: {
+            'X-RequestDigest': $("#__REQUESTDIGEST").val(),
+            'Accept': "application/json;odata=verbose",
+            'content-type': "application/json;odata=verbose",
+            'X-HTTP-Method': 'POST'
+            },
         success: onSuccess,        
         error: onError    
     });
