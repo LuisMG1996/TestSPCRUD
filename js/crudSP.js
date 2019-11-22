@@ -1,9 +1,6 @@
-'use strict';  
-ExecuteOrDelayUntilScriptLoaded(initializePage, "sp.js");  
-
 var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
 
-/*$(function(){
+$(function(){
     $("#btnCreate").click(function(){
         var userid = _spPageContextInfo.userId;
         var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/lists/getByTitle('TestOficial')/items";
@@ -61,9 +58,9 @@ var siteURl = "http://win-pdplr21ulp4/sites/scotiatube"
         });
 }); 
 
-/*-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 / READ Operation
-/------------------------------------------------------------------------
+//------------------------------------------------------------------------
 
 $(function(){
     $("#btnRead").click(function(){
@@ -98,52 +95,66 @@ function onQuerySucceeded(data) {
 / READ Operation
 /------------------------------------------------------------------------
 
-
-function updateDigest(){
-    $.ajax({
-        url: _spPageContextInfo.webAbsoluteUrl + "/_api/contextinfo",
-        method: "POST",
-        headers: { "Accept": "application/json; odata=verbose"},
-        success: function (data) {
-            $('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue)
-        },
-        error: function (data, errorCode, errorMessage) {
-            alert(errorMessage)
-        }
-    });
-    
-}
-
+/*-----------------------------------------------------------------------
+/ DELETE Operation
+/------------------------------------------------------------------------
 */
-  
-function initializePage() {  
-    var siteURL;  
-    // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model  
-    $(document).ready(function() {  
-        var scriptbase = _spPageContextInfo.webServerRelativeUrl + "/_api/lists/getBytitle('TestOficial')";  
-        CreateListItem();  
-    });  
-    //Retrieve list items from sharepoint using API  
-
-
-function CreateListItem() {  
-    siteURL = _spPageContextInfo.webAbsoluteUrl;  
-    console.log("from top nav - " + siteURL);  
-    var apiPath = siteURL + "/_api/lists/getbytitle(''samplelist'')/items";  
-    /*$.ajax({  
-            url: apiPath,  
-            type: "POST",  
-            headers: {  
-                Accept: "application/json;odata=verbose"  
-            },  
-            data: "{__metadata:{'type':'SP.Data.YourlistnameListItem'},Title:'Ur input' }",  
-            async: false,
-            success: function(data) {
-                alert("Item is Created successfully!!");  
+$(function(){
+    $("btnDelete").click(function(){
+        var title = document.getElementById('title').value ;
+        var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items?$filter=Title eq" + title;
+        $.ajax({
+            url: requestUri,
+            type: 'POST',
+            headers:{
+                "ACCEPT": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
+                "X-HTTP-Method-Override": "DELETE"
             },
-            error: function(data) {  
-                console.log("An error occurred. Please try again.");  
-        }  
-    });  */
-}  
-}  
+            success: function(data){
+                alert("Elemento eliminado");
+            },
+            error: function(data){
+                alert("Error");
+            }
+        });
+    });
+
+});
+/*-----------------------------------------------------------------------
+/ DELETE Operation
+/------------------------------------------------------------------------
+*/
+
+/*-----------------------------------------------------------------------
+/ UPDATE Operation
+/------------------------------------------------------------------------
+*/
+$(function(){
+    $("btnUpdate").click(function(){
+        var title = document.getElementById('title').value ;
+        var requestUri = siteURl + "/_api/lists/getByTitle('TestOficial')/items?$filter=Title eq" + title;
+        var metaData = { __metadata: { 'type': 'SP.Data.TestOficialListItem' }, Title: 'NewName' }; 
+        $.ajax({
+            url: requestUri,
+            type: 'POST',
+            headers:{
+                "ACCEPT": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
+                "X-HTTP-Method-Override": "MERGE"
+            },
+            data: JSON.stringify(metaData),
+            success: function(data){
+                alert("Elemento Actualizado");
+            },
+            error: function(data){
+                alert("Error");
+            }
+        });
+    });
+
+});
+
+
